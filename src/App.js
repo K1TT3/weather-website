@@ -5,24 +5,41 @@ function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
 
-  //"X-Api-Key": "a2OGHdyD19BSWTAvzwLz9w==o4xI0wy0HpJhur5g"
+  const config = {
+    headers: {
+      "X-Api-Key": XApiKey,
+    },
+  };
 
-  const url2 =
-    "https://api.brightsky.dev/weather?lat=51&lon=12&date=2022-12-09";
+  const XApiKey = "a2OGHdyD19BSWTAvzwLz9w==o4xI0wy0HpJhur5g";
+
+  const url1 = `https://api.api-ninjas.com/v1/geocoding?city=${location}&country=Germany`;
+
+  const url2 = `https://api.brightsky.dev/weather?lat=${lat}&lon=${lon}&date=${date}`; //date=2022-12-09
+
+  var lat;
+  var lon;
+  var date;
 
   //Methode für Geocoding API, Gib Name von Stadt, bekomme Lat und Lon,
   //Lat und Lon für Ansprechen Brightsky API
 
   const getCoordinate = () => {};
 
-  const searchLocation = (event) => {
+  function getCoordinates(location) {
+    axios.get(url1, config).then((response) => {
+      console.log(response.data);
+    });
+  }
+
+  function searchLocation(event) {
     if (event.key === "Enter") {
       axios.get(url2).then((response) => {
         setData(response.data);
         console.log(response.data);
       });
     }
-  };
+  }
 
   return (
     <div className="app">
@@ -30,7 +47,8 @@ function App() {
         <input
           value={location}
           onChange={(event) => setLocation(event.target.value)}
-          onKeyPress={searchLocation}
+          //onPress={searchLocation}
+          onPress={getCoordinates(location)}
           placeholder="Enter Location"
           type="text"
         />
