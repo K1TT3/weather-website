@@ -10,10 +10,13 @@ function App() {
   const url2 =
     "https://api.brightsky.dev/weather?lat=51&lon=12&date=2022-12-09";
 
+  // lat = $lat, lon = $lon, date = $date
   //Methode für Geocoding API, Gib Name von Stadt, bekomme Lat und Lon,
   //Lat und Lon für Ansprechen Brightsky API
 
   const getCoordinate = () => {};
+
+  void function () {};
 
   const searchLocation = (event) => {
     if (event.key === "Enter") {
@@ -30,7 +33,7 @@ function App() {
         <input
           value={location}
           onChange={(event) => setLocation(event.target.value)}
-          onKeyPress={searchLocation}
+          onPress={searchLocation}
           placeholder="Enter Location"
           type="text"
         />
